@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#064e3b">
+  <meta name="description" content="Diet2Activity helps you eat better, move more, and build healthier habits.">
+  <title>D2A | Diet2Activity</title>
+  <style>
+    :root {
+      --green-dark: #064e3b;
+      --green: #07864b;
+      --green-bright: #8be65b;
+      --mint: #effaf1;
+      --ink: #10251d;
+      --muted: #607168;
+      --white: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: #fbfdfb;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+    header {
+      position: sticky; top: 0; z-index: 5;
+      background: rgba(255,255,255,.94);
+      border-bottom: 1px solid #e7efe8;
+      backdrop-filter: blur(12px);
+    }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 850; color: var(--green-dark); letter-spacing: -.7px; font-size: 1.45rem; }
+    .brand-mark {
+      display: grid; place-items: center; width: 42px; height: 42px; border-radius: 14px;
+      color: var(--green-dark); background: var(--green-bright); font-size: 1.3rem; font-weight: 900;
+    }
+    .brand small { display: block; font-size: .68rem; line-height: 1; letter-spacing: .5px; font-weight: 650; }
+    .nav-links { display: flex; align-items: center; gap: 26px; font-size: .93rem; color: #40564a; }
+    .nav-links a:hover { color: var(--green); }
+    .button {
+      display: inline-flex; justify-content: center; align-items: center; gap: 9px;
+      border: 0; border-radius: 999px; padding: 12px 20px; font: inherit; font-weight: 750;
+      background: var(--green); color: white; cursor: pointer; transition: transform .15s, background .15s;
+    }
+    .button:hover { background: var(--green-dark); transform: translateY(-1px); }
+    .button.secondary { background: white; color: var(--green-dark); border: 1px solid #d4e6d8; }
+    .hero {
+      padding: 74px 0 68px;
+      background: radial-gradient(circle at 80% 25%, #d8f8b9 0, transparent 28%), linear-gradient(120deg, #f1fbf1 0%, #ffffff 70%);
+      overflow: hidden;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.08fr .92fr; align-items: center; gap: 52px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; border: 1px solid #d8edcf; background: #f7fff3; color: var(--green-dark); border-radius: 999px; padding: 7px 12px; font-size: .82rem; font-weight: 750; }
+    .eyebrow span { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+    h1 { margin: 20px 0 18px; font-size: clamp(2.6rem, 5vw, 4.5rem); line-height: 1.04; letter-spacing: -2.8px; color: var(--green-dark); }
+    h1 em { color: var(--green); font-style: normal; }
+    .hero p { color: var(--muted); font-size: 1.12rem; max-width: 530px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .fine-print { font-size: .82rem !important; margin-top: 16px; }
+    .visual { position: relative; min-height: 370px; display: grid; place-items: center; }
+    .orbit { position: absolute; width: min(360px, 90%); aspect-ratio: 1; border-radius: 50%; background: var(--green-bright); opacity: .7; }
+    .food-card {
+      position: relative; width: min(390px, 100%); padding: 28px; border-radius: 28px;
+      background: white; box-shadow: 0 24px 70px rgba(6,78,59,.14); transform: rotate(2deg);
+      border: 1px solid rgba(6,78,59,.08);
+    }
+    .food-card-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .food-card-top strong { color: var(--green-dark); font-size: 1.05rem; }
+    .pill { border-radius: 999px; background: #eaf9e2; color: var(--green-dark); padding: 5px 10px; font-size: .75rem; font-weight: 800; }
+    .meal-illustration { margin: 22px auto; width: 220px; height: 160px; border-radius: 48% 52% 46% 54%; background: #f4f0dc; display: grid; place-items: center; font-size: 5.8rem; box-shadow: inset 0 0 0 10px #fff; }
+    .macro-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 9px; }
+    .macro { padding: 11px 8px; border-radius: 13px; background: #f5faf5; text-align: center; }
+    .macro b { display: block; color: var(--green-dark); font-size: 1rem; }
+    .macro span { font-size: .72rem; color: var(--muted); }
+    section { padding: 76px 0; }
+    .section-heading { text-align: center; max-width: 660px; margin: 0 auto 36px; }
+    .section-heading h2 { color: var(--green-dark); font-size: clamp(1.9rem, 3vw, 2.7rem); letter-spacing: -1.2px; line-height: 1.15; margin: 0 0 12px; }
+    .section-heading p { margin: 0; color: var(--muted); }
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .feature { padding: 25px; border: 1px solid #e2eee3; border-radius: 20px; background: white; }
+    .feature-icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 15px; background: var(--mint); font-size: 1.45rem; margin-bottom: 16px; }
+    .feature h3 { color: var(--green-dark); margin: 0 0 8px; font-size: 1.08rem; }
+    .feature p { margin: 0; color: var(--muted); font-size: .94rem; }
+    .about { background: var(--green-dark); color: white; }
+    .about-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: center; }
+    .about-mark { min-height: 230px; display: grid; place-items: center; border-radius: 26px; background: linear-gradient(145deg, #0b6c4d, #032f25); border: 1px solid rgba(255,255,255,.15); }
+    .about-mark span { font-size: clamp(4rem, 9vw, 7rem); font-weight: 950; letter-spacing: -7px; color: var(--green-bright); }
+    .about h2 { margin: 0 0 16px; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.12; letter-spacing: -1.5px; }
+    .about p { color: #d2e8dc; }
+    .about .button { margin-top: 12px; background: var(--green-bright); color: var(--green-dark); }
+    .cta { text-align: center; padding: 72px 0; background: var(--mint); }
+    .cta h2 { color: var(--green-dark); font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15; margin: 0 0 12px; letter-spacing: -1.4px; }
+    .cta p { color: var(--muted); margin: 0 auto 24px; max-width: 580px; }
+    footer { padding: 25px 0; background: white; border-top: 1px solid #e7efe8; }
+    .footer-row { display: flex; justify-content: space-between; align-items: center; gap: 18px; color: var(--muted); font-size: .86rem; }
+    .footer-row strong { color: var(--green-dark); }
+    @media (max-width: 780px) {
+      .nav { min-height: 68px; }
+      .nav-links { gap: 14px; font-size: .84rem; }
+      .nav-links a:not(.button) { display: none; }
+      .hero { padding: 52px 0 45px; }
+      .hero-grid, .about-grid { grid-template-columns: 1fr; gap: 26px; }
+      .visual { min-height: 330px; }
+      .features { grid-template-columns: 1fr 1fr; }
+      .about-mark { min-height: 170px; }
+    }
+    @media (max-width: 480px) {
+      .wrap { width: min(100% - 28px, 1120px); }
+      h1 { letter-spacing: -1.7px; }
+      .features { grid-template-columns: 1fr; }
+      .food-card { padding: 20px; }
+      .meal-illustration { width: 185px; height: 135px; font-size: 4.8rem; }
+      .footer-row { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#home" aria-label="D2A home">
+        <span class="brand-mark">D2A</span>
+        <span>Diet2Activity<small>EAT BETTER · MOVE MORE</small></span>
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+        <a class="button" href="#get-started">Get started</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow"><span></span> Small steps. Lasting habits.</div>
+          <h1>Better food.<br>More <em>activity.</em><br>A healthier you.</h1>
+          <p>D2A brings nutrition and movement together to help you build routines that fit your goals and your everyday life.</p>
+          <div class="actions">
+            <a class="button" href="#features">Explore the features <span aria-hidden="true">→</span></a>
+            <a class="button secondary" href="#about">Our mission</a>
+          </div>
+          <p class="fine-print">Your health journey, one practical choice at a time.</p>
+        </div>
+        <div class="visual" aria-label="Illustration of a healthy meal and nutrition summary">
+          <div class="orbit"></div>
+          <div class="food-card">
+            <div class="food-card-top"><strong>Today's balance</strong><span class="pill">Your journey</span></div>
+            <div class="meal-illustration" aria-hidden="true">🥗</div>
+            <div class="macro-row">
+              <div class="macro"><b>Fuel</b><span>Eat mindfully</span></div>
+              <div class="macro"><b>Move</b><span>Stay active</span></div>
+              <div class="macro"><b>Repeat</b><span>Build habits</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="wrap">
+        <div class="section-heading">
+          <h2>Your everyday wellness toolkit</h2>
+          <p>Simple tools designed to help you make informed choices and keep moving toward your goals.</p>
+        </div>
+        <div class="features">
+          <article class="feature"><div class="feature-icon" aria-hidden="true">🍎</div><h3>Food & calorie tracking</h3><p>Understand what you eat and keep track of your daily nutrition.</p></article>
+          <article class="feature"><div class="feature-icon" aria-hidden="true">🎯</div><h3>Personalised goals</h3><p>Shape your routine around your goals, preferences, and progress.</p></article>
+          <article class="feature"><div class="feature-icon" aria-hidden="true">🏃</div><h3>Activity & workouts</h3><p>Find ideas for gym sessions, home workouts, and everyday movement.</p></article>
+          <article class="feature"><div class="feature-icon" aria-hidden="true">📈</div><h3>Progress tracking</h3><p>Keep an eye on your consistency and celebrate meaningful milestones.</p></article>
+          <article class="feature"><div class="feature-icon" aria-hidden="true">🥑</div><h3>Daily recommendations</h3><p>Explore practical food and activity suggestions for your day.</p></article>
+          <article class="feature"><div class="feature-icon" aria-hidden="true">🧑‍⚕️</div><h3>Dietician connection</h3><p>A planned way to connect people with qualified nutrition professionals.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="wrap about-grid">
+        <div class="about-mark" aria-hidden="true"><span>D2A</span></div>
+        <div>
+          <h2>Make healthy living feel more achievable.</h2>
+          <p>Diet2Activity is a project exploring how nutrition guidance and physical activity can work together in one simple experience.</p>
+          <p>We believe progress comes from realistic choices repeated consistently—not from trying to change everything at once.</p>
+          <a class="button" href="#get-started">Follow the journey <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="get-started">
+      <div class="wrap">
+        <h2>Your goals. Your pace. Your next step.</h2>
+        <p>D2A is being built. Follow along as the idea grows into a practical nutrition and activity companion.</p>
+        <!-- Replace the # below with your Instagram or waitlist URL when ready. -->
+        <a class="button" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Follow our journey <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <strong>D2A · Diet2Activity</strong>
+      <span>Eat better · Move more · Live healthier</span>
+      <span>© <span id="year"></span> Diet2Activity</span>
+    </div>
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
